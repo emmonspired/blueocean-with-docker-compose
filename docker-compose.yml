@@ -1,0 +1,18 @@
+version: '3'
+services:
+  jenkins:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    user: root
+    environment: 
+      # - JAVA_OPTS="-Dhudson.model.DirectoryBrowserSupport.CSP=sandbox allow-scripts; default-src 'self'; style-src 'self' 'unsafe-inline';"
+      - JAVA_OPTS="-Dhudson.model.DirectoryBrowserSupport.CSP=default-src 'self'; script-src 'self'; connect-src 'self'; img-src 'self'; style-src 'self';"
+    ports:
+      - "50000:5000"
+      - "8080:8080"
+    volumes:
+      - $PWD/jenkins_home:/var/jenkins_home
+      - $PWD/home_dir:/home
+      - /var/run/docker.sock:/var/run/docker.sock
+    container_name: Jenkins_Master
