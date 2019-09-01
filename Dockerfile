@@ -1,5 +1,7 @@
 FROM jenkinsci/blueocean
 
+LABEL description="This image was built using the Dockerfile and docker-compose.yml by starting with `jenkinsci/blueocean` and adds a layer that ensures `docker-compose` is installed properly and available as an executable binary from Jenkins pipelines."
+
 USER root
 
 RUN curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose && \
